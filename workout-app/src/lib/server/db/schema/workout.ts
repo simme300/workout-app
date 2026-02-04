@@ -1,4 +1,13 @@
-import { pgTable, varchar, timestamp, pgEnum, uuid, interval, index } from 'drizzle-orm/pg-core';
+import {
+	pgTable,
+	varchar,
+	timestamp,
+	pgEnum,
+	uuid,
+	interval,
+	index,
+	integer
+} from 'drizzle-orm/pg-core';
 import { user } from './user';
 
 export const dayEnum = pgEnum('day', ['push', 'pull', 'legs']);
@@ -13,7 +22,8 @@ export const workoutTable = pgTable(
 		duration: interval({ fields: 'hour to second' }),
 		day: dayEnum(),
 		weekday: weekDayEnum(),
-		created_at: timestamp().defaultNow()
+		created_at: timestamp().defaultNow(),
+		count: integer()
 	},
 	(table) => [index('duration_index').on(table.duration), index('day_index').on(table.day)]
 );
