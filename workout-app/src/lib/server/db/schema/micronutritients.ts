@@ -1,4 +1,5 @@
 import { pgTable, uuid, pgEnum, text } from 'drizzle-orm/pg-core';
+import { foodTable } from './food';
 
 export const microEnum = pgEnum('micros', [
 	'Vitamin D',
@@ -26,7 +27,8 @@ export const microEnum = pgEnum('micros', [
 ]);
 
 export const microTable = pgTable('micro', {
-	id: uuid(),
+	id: uuid().primaryKey().defaultRandom(),
+	foodId: uuid('food_id').references(() => foodTable.id),
 	type: microEnum(),
 	amount: text()
 });

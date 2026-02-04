@@ -1,7 +1,9 @@
 import { pgTable, varchar, uuid, numeric, smallint } from 'drizzle-orm/pg-core';
+import { workoutTable } from './workout';
 
 export const exerciseTable = pgTable('exercise', {
-	id: uuid(),
+	id: uuid().primaryKey().defaultRandom(),
+	workoutId: uuid('workout_id').references(() => workoutTable.id),
 	name: varchar({ length: 256 }),
 	reps: smallint(),
 	partial_reps: smallint(),

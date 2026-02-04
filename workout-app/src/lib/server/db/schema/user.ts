@@ -1,6 +1,6 @@
 import {
 	pgTable,
-	serial,
+	uuid,
 	integer,
 	varchar,
 	text,
@@ -10,7 +10,7 @@ import {
 } from 'drizzle-orm/pg-core';
 
 export const user = pgTable('user', {
-	id: serial('id').primaryKey(),
+	id: uuid().primaryKey().defaultRandom(),
 	age: integer('age'),
 	name: varchar({ length: 256 }),
 	email: text().notNull(),
