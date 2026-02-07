@@ -1,5 +1,7 @@
-import { pgTable, varchar, uuid, numeric, smallint, index } from 'drizzle-orm/pg-core';
+import { pgTable, varchar, uuid, numeric, smallint, index, pgEnum } from 'drizzle-orm/pg-core';
 import { workoutTable } from './workout';
+
+export const failureEnum = pgEnum('failure', ['F', 'failure']);
 
 export const exerciseTable = pgTable(
 	'exercise',
@@ -8,6 +10,7 @@ export const exerciseTable = pgTable(
 		workoutId: uuid('workout_id').references(() => workoutTable.id),
 		name: varchar({ length: 256 }),
 		reps: smallint(),
+		failure: failureEnum(),
 		partial_reps: smallint(),
 		total_reps: numeric({ scale: 4, precision: 2 })
 	},
