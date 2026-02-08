@@ -5,9 +5,9 @@ export const progressPictureTable = pgTable(
 	'progress_pictures',
 	{
 		id: uuid().primaryKey().defaultRandom(),
-		user_id: uuid('user_id')
-			.references(() => user.id)
-			.notNull(),
+		userId: text('user_id')
+			.notNull()
+			.references(() => user.id),
 		title: varchar({ length: 256 }),
 		url: text().notNull(),
 		mime_type: varchar('mime_type', { length: 64 }),
@@ -17,5 +17,5 @@ export const progressPictureTable = pgTable(
 		uploaded_at: timestamp('uploaded_at').defaultNow(),
 		created_at: timestamp('created_at').defaultNow()
 	},
-	(table) => [index('progress_picture_user_id_index').on(table.user_id)]
+	(table) => [index('progress_picture_user_id_index').on(table.userId)]
 );

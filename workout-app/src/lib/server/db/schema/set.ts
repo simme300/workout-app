@@ -9,5 +9,5 @@ export const setTable = pgTable(
 		number: smallint(),
 		duration: interval({ fields: 'minute to second' })
 	},
-	(table) => [index('number_index').on(table.number), index('duration_index').on(table.duration)]
+	(table) => [index('set_number_index').on(table.number), index('set_duration_index').on(table.duration)]
 );

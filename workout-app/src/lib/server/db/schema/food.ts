@@ -8,5 +8,5 @@ export const foodTable = pgTable(
 		mealId: uuid('meal_id').references(() => mealTable.id),
 		name: varchar({ length: 256 })
 	},
-	(table) => [index('name_index').on(table.name)]
+	(table) => [index('food_name_index').on(table.name)]
 );

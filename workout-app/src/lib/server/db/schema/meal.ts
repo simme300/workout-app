@@ -1,4 +1,4 @@
-import { pgEnum, pgTable, uuid, time, smallint } from 'drizzle-orm/pg-core';
+import { pgEnum, pgTable, uuid, time, smallint, text } from 'drizzle-orm/pg-core';
 import { user } from './user';
 
 export const mealEnum = pgEnum('mealtype', [
@@ -14,7 +14,9 @@ export const mealEnum = pgEnum('mealtype', [
 
 export const mealTable = pgTable('meals', {
 	id: uuid().primaryKey().defaultRandom(),
-	userId: uuid('user_id').references(() => user.id),
+	userId: text('user_id')
+		.notNull()
+		.references(() => user.id),
 	type: mealEnum().notNull(),
 	number: smallint(),
 	time: time()

@@ -6,7 +6,8 @@ import {
 	uuid,
 	interval,
 	index,
-	integer
+	integer,
+	text
 } from 'drizzle-orm/pg-core';
 import { user } from './user';
 
@@ -17,7 +18,9 @@ export const workoutTable = pgTable(
 	'workouts',
 	{
 		id: uuid().primaryKey().defaultRandom(),
-		userId: uuid('user_id').references(() => user.id),
+		userId: text('user_id')
+			.notNull()
+			.references(() => user.id),
 		title: varchar({ length: 256 }),
 		duration: interval({ fields: 'hour to second' }),
 		day: dayEnum(),
@@ -25,5 +28,8 @@ export const workoutTable = pgTable(
 		created_at: timestamp().defaultNow(),
 		count: integer()
 	},
-	(table) => [index('duration_index').on(table.duration), index('day_index').on(table.day)]
+	(table) => [
+		index('workout_duration_index').on(table.duration),
+		index('workout_day_index').on(table.day)
+	]
 );

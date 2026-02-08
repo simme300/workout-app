@@ -14,5 +14,5 @@ export const exerciseTable = pgTable(
 		partial_reps: smallint(),
 		total_reps: numeric({ scale: 4, precision: 2 })
 	},
-	(table) => [index('name_index').on(table.name), index('reps_index').on(table.total_reps)]
+	(table) => [index('exercise_name_index').on(table.name), index('exercise_reps_index').on(table.total_reps)]
 );

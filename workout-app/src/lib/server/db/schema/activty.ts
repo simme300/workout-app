@@ -1,7 +1,7 @@
 import { pgTable, uuid, pgEnum, interval, index, numeric } from 'drizzle-orm/pg-core';
 import { workoutTable } from './workout';
 
-export const activitEnum = pgEnum('activity', ['walking']);
+export const activitEnum = pgEnum('activity_type', ['walking']);
 
 export const activityTable = pgTable(
 	'activity',
